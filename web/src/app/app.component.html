@@ -1,0 +1,26 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container pull-left" style="width: 500px;">
+  <h3>{{title}}</h3>
+  <br />
+  <form #form="ngForm" (ngSubmit)="submitForm(form)">
+    <div class="form-group">
+      <label for="FirstName" class="">First Name</label>
+      <input type="text" [(ngModel)]="item.firstName" name="FirstName" id="FirstName" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="LastName">Last Name</label>
+      <input type="text" [(ngModel)]="item.lastName" name="LastName" id="LastName" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="DateOfBirth">Date of Birth</label>
+      <input type="date" [(ngModel)]="item.dateOfBirth" name="DateOfBirth" id="DateOfBirth" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="GPA">GPA</label>
+      <input type="number" [(ngModel)]="item.gpa" name="GPA" id="GPA" class="form-control" step="0.01" placeholder="Enter a GPA greater than 0" required min="0.01" />
+    </div>
+    <button class="btn btn-primary pull-right" style="margin-top: 10px;" type="submit" value="Submit">Insert</button>
+  </form>
+</div>
+<div style="clear: both;"></div>
+<data-grid>Loading...</data-grid>
