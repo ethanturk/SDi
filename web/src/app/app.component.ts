@@ -8,7 +8,6 @@ interface Item {
     gpa: string;
 }
 
-var items: Item[];
 var isDataAvailable: boolean = false;
 
 @Component({
@@ -19,7 +18,9 @@ var isDataAvailable: boolean = false;
 
 export class AppComponent {
     title = 'Input Form';
+    gridtitle = 'Entered Data';
     item = {} as Item;
+    items: Item[];
     private loading: boolean = false;
     private results: any;
     private service: DataService;
@@ -29,14 +30,15 @@ export class AppComponent {
     }
 
     getItems() {
-        this.service.get().then(i => items = i);
+        this.service.get().then(i => this.items = i);
     }
 
     ngOnInit() {
-        //this.getItems();
+        this.getItems();
     }
 
     submitForm(formObj) {
-        this.service.insert(formObj.value).then(i => console.log(i));
+        this.service.insert(formObj.value)..finally(() => this.getItems());
+        //this.getItems();
     }
 }

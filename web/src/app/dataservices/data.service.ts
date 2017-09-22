@@ -28,8 +28,8 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    insert(model: Item): Promise<Response> {
-        return this.http.post(this.apiRoot, model).toPromise();
+    insert(model: Item): Observable<Response> {
+        return this.http.post(this.apiRoot, model);
     }
 
     private handleError(error: any): Promise<any> {
