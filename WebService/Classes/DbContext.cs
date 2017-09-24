@@ -10,6 +10,8 @@ namespace WebService.Classes
             : base(options)
         { }
 
+        public DataContext() { }
+
         public DbSet<DataItem> Items { get; set; }
     }
 }

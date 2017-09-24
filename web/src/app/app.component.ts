@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { DataService } from "./dataservices/data.service"; 
+import 'rxjs/add/operator/map'
 
-interface Item {
+class Item {
     firstName: string;
     lastName: string;
     dateOfBirth: string;
     gpa: string;
 }
-
-var isDataAvailable: boolean = false;
 
 @Component({
     selector: 'app-root',
@@ -21,16 +20,14 @@ export class AppComponent {
     gridtitle = 'Entered Data';
     item = {} as Item;
     items: Item[];
-    private loading: boolean = false;
-    private results: any;
-    private service: DataService;
+    service: DataService;
 
     constructor(private svc: DataService) {
         this.service = svc;
     }
 
     getItems() {
-        this.service.get().then(i => this.items = i);
+        this.service.get().map(res => res.json()).subscribe(i => this.items = i);
     }
 
     ngOnInit() {
@@ -38,7 +35,9 @@ export class AppComponent {
     }
 
     submitForm(formObj) {
-        this.service.insert(formObj.value)..finally(() => this.getItems());
+        //Having CORS issues where Preflight is sent and headers match but a failure is still reported 
+        //(despite the record being created). Refreshing the page is the workaround. Would need further time to investigate.
+        this.service.insert(formObj.value);
         //this.getItems();
     }
 }

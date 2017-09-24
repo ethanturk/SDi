@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using WebService.Services;
 using WebService.Classes;
 using WebService.Models;
+using WebService.Interfaces;
 
 namespace WebService.Controllers
 {
     [Route("api/[controller]")]
-    public class DataController : Controller
+    public class DataController : Controller, Interfaces.IDataController
     {
         private DataService dataSvc;
         public DataController(DataContext dbCxt)
@@ -28,7 +29,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                //Log this message
+                //Log this message using NLog, AppInsights or similar
                 return BadRequest(ex.Message);
             }
         }
@@ -37,13 +38,15 @@ namespace WebService.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            if (id <= 0) { throw new ArgumentException("You must supply a valid ID."); }
+
             try
             {
                 return Ok(dataSvc.Get(id));
             }
             catch (Exception ex)
             {
-                //Log this message
+                //Log this message using NLog, AppInsights or similar
                 return BadRequest(ex.Message);
             }
         }
@@ -52,14 +55,15 @@ namespace WebService.Controllers
         [HttpPost]
         public void Post([FromBody]DataItem item)
         {
+            if (item == null) { throw new ArgumentException("You must supply a valid model."); }
+
             try
             {
                 Ok(dataSvc.InsertAsync(item));
             }
             catch (Exception ex)
             {
-                //Log this message
-                
+                //Log this message using NLog, AppInsights or similar
             }
         }
 
@@ -67,12 +71,14 @@ namespace WebService.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE api/data/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }

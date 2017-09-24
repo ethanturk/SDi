@@ -5,13 +5,11 @@ import { Observable } from 'rxjs';
 import { DataService } from "./dataservices/data.service";
 
 import { AppComponent } from './app.component';
-import { DataGrid } from './data-grid.component';
 import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
-      AppComponent,
-      DataGrid
+      AppComponent
   ],
   imports: [
       BrowserModule,

@@ -41,10 +41,9 @@ namespace WebService
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCors(builder => builder
-                .AllowAnyOrigin()
+                .WithOrigins("http://localhost:4200")
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowAnyHeader());
             app.UseMvc();
 
             app.UseSwagger();
