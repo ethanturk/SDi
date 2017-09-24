@@ -11,7 +11,7 @@ class Item {
 
 @Injectable()
 export class DataService {
-    apiRoot: string = 'http://localhost:4576/api/Data';
+    apiRoot: string = 'http://localhost:4577/api/Data';
 
     constructor(private httpClient: Http) {
     }
